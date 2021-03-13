@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memo-List</title>
+   <style>
+       @media screen and (max-width: 600px){
+	body *{
+        transform:scale(0.9);
+    }
+}
+       body{width:98vw;
+    min-height:97vh;
+    max-height: fit-content;
+    background-color: rgb(54, 54, 54);z-index:1;
+}
+.memoname{
+    border:none;
+    font-size:4vh;
+    text-align: center;
+    color: rgb(189, 128, 15);
+    background-color: rgb(54, 54, 54);
+    box-sizing: border-box;
+}
+.memopage{
+border:2px solid black;
+display:flex;
+width:98vw;
+flex-direction: column;
+padding:2vw;
+overflow: hidden;
+box-sizing: border-box;
+}
+button{
+    cursor: pointer;
+}
+.username{
+    margin: auto;
+    text-align: center;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.nameanimation{
+    height:4px;
+    background-color: rgb(27, 143, 94);
+    transform: translateX(-500px);
+}
+.nowanimation{
+    transition: 10s;
+    transform:translateX(+1000px);
+}
+.alltasks{
+    margin-top: 3vh;
+}
+form{
+    display: flex;
+}
+.taskadder{
+color:white;
+background-color: rgb(54, 54, 54);
+border: 1px white solid;
+color:green;font-size: large;
+letter-spacing: 0.8px;
+word-spacing: 1px;
+padding:10px;
+}
+.add{
+    display:block;
+}
+.task{
+    border: dotted black 1px;
+    color: rgb(52, 163, 52);
+    word-spacing: 1px;
+    letter-spacing: 0.8px;
+    font-size: large;
+    font-weight: 500;
+    margin-top:3vh;
+    position:relative;
+    padding: 0.5vw;
+}
+.task .delete{
+    background:url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIx_h8mRp0UXMzGh_tvg2SCceDbYVE6c9JvA&usqp=CAU");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height:25px;
+    width:25px;
+    position: absolute;
+    right: 2%;
+    top:36%;
+}
+span{
+    color:orange;
+}
+   </style>
+</head>
+<body>
+    <div class="memopage">
+        <h1 class="username">
+             <input type="text" class="memoname" value="Untitled"> 
+            <div class="nameanimation"></div>
+        </h1>
+        <div class="alltasks">
+                <form >
+                <span> Task to be added:-</span><input type="text" name="" class="taskadder" required id="" ></input>
+                </form>
+                <button class="add" onclick="addnow()">Add</button>
+        </div>
+    </div>
+</body>
+<script >
+setInterval(function(){
+document.querySelector('.nameanimation').classList.toggle("nowanimation")
+},4000)
+document.querySelector('.taskadder').addEventListener("keydown",e=>{
+        if(e.key=="Enter"){
+        addnow();
+        document.querySelector('.taskadder').value=''
+        document.querySelector('.taskadder').focus();
+}});
+function addnow(){
+    let taskobject=document.querySelector(".taskadder");
+    task=taskobject.value;
+    if(task!='' && task!=' ')
+{  
+    document.querySelector(".alltasks").insertAdjacentHTML("beforeend",
+    `<div class="task">
+    <p>${task}</p>
+    <button class="delete" onclick="removetask(this)"></button>
+</div>
+    `)}
+}
+function removetask(e){
+    e.parentElement.remove();
+}
+</script>
+</html>
